@@ -1,0 +1,62 @@
+on:
+  push:
+    paths:
+      - "data/*.csv"   # Trigger only when CSVs are added/modified in data/
+
+jobs:
+  run-etl:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Needed for committing back to repo
+    environment: Env
+    env: 
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/src
+    #Postgress   
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+    steps:
+      # ⃣ Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      #  Setup Python environment
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+
+      #  Install dependencies
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # ⃣ Run ETL script
+      - name: Run ETL
+        run: python src/main_flow.py
+
+      #  Commit & push generated output
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "ETL-Bot"
+          git config --global user.email "bot@github.com"
+          git add output/*
+          git commit -m "Auto-processed new CSV [skip ci]" || echo "No changes to commit"
+          git push
+
+      #  Slack notification on success
+      - name: Slack Notification Success
+        if: success()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEB_HOOK_URL }}
+          SLACK_MESSAGE: "File ETL workflow completed successfully!"
+
+      #  Slack notification on failure
+      - name: Slack Notification Failure
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEB_HOOK_URL }}
+          SLACK_MESSAGE: "File ETL pipeline Failed process"
+
