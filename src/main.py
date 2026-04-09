@@ -56,16 +56,20 @@ async def load_to_db_task(data1):
   
 @flow(name="File_Event_Driven_Flow",retries=3,log_prints=True)
 async def main_flow():
-  file = fetch_csv_data()
+  
+  
+  file = fetch_file_task()
   print(len(file))
   
-  save_raw_to_json(file)
   
-  clean,unclean = validate_file_data(file,UserData)
+  save_raw_data_task(file)
   
-  data1= transform_data(clean,unclean)
   
-  await load_to_postgres(data1)
+  clean,unclean = validate_data_task(file,UserData)
+  
+  data1= transform_data_task(clean,unclean)
+  
+  await load_to_db_task(data1)
 
 if __name__=="__main__":
   asyncio.run(main_flow())
