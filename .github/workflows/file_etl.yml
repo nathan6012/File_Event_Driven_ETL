@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-      - "storage/*.csv"   # Trigger only when CSVs are added/modified in data/
+      - "storage/**/*.csv"   # Trigger only when CSVs are added/modified in data/
 
 jobs:
   run-etl:
