@@ -10,20 +10,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 #Logging 
 logging.getLogger().setLevel(logging.INFO)
 
-
-
-
-
-def fetch_csv_data()-> dict[str,list[dict]]:
-  """ Tracks Git hub /Storage to process CSV files that are commited in that folder in ETL pipeline"""
-  
-  import csv
-from pathlib import Path
-import subprocess
-import sys
-import os
-import logging
-
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 
