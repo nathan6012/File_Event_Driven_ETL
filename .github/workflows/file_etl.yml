@@ -33,7 +33,7 @@ jobs:
 
       # ⃣ Run ETL script
       - name: Run ETL
-        run: python src/main_flow.py
+        run: python src/main.py
 
       #  Commit & push generated output
       - name: Commit and Push changes
