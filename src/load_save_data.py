@@ -37,7 +37,7 @@ async def load_to_postgres(data):
 
     Column("id", Integer, primary_key=True, autoincrement=True),
 
-    Column("customer_name", String(100), nullable=False,Unique=True),
+    Column("customer_name", String(100), nullable=False,unique=True),
     Column("age", Integer, nullable=False),
     Column("email", String(255), nullable=False),
     Column("purchase_amount", Numeric(10, 2), nullable=False),
@@ -46,14 +46,14 @@ async def load_to_postgres(data):
     Column("region", String(50), nullable=False),
     Column("purchase_date", DateTime, nullable=False),)
     
-  Index("id", customers_table.c.id)
+  Index("id", customers.c.id)
   
   async with engine.begin() as conn:
     await conn.run_sync(metadata.create_all)
   
 
   async with engine.begin() as conn:
-    stmt = insert(customers_table).values(data)
+    stmt = insert(customers).values(data)
     stmt = stmt.on_conflict_do_update(
       index_elements=["customer_name"],
       

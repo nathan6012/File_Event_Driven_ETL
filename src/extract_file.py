@@ -1,7 +1,6 @@
 import csv
 from pathlib import Path
 import subprocess
-
 import sys
 import os
 import logging 
@@ -13,46 +12,53 @@ logging.getLogger().setLevel(logging.INFO)
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 
+
+
 def fetch_csv_data() -> list[dict]:
-  """Track changed CSV file from Git and return its rows as a list of dicts."""
-  dir_url = Path(__file__).resolve().parent
-  root_dir = dir_url.parent
-  sub_folder = root_dir / "storage"
-
-  try:
-    result = subprocess.run(
-            ["git", "diff", "--name-only", "--diff-filter=AM", "HEAD~1", "HEAD"],
-            capture_output=True,
-            text=True,
-            check=True,
-            cwd=root_dir
-        )
-        
-  except (subprocess.CalledProcessError,FileNotFoundError):
-    print("Log: No Git history or repository found.")
-    return []
-
+  
+  folder_dir = Path(__file__).resolve().parent
+  root_dir = folder_dir.parent
+  storage = root_dir/"storage"
+  #file = storage/"sample_data.csv"
+  
+  result = subprocess.run(
+        ["git", "ls-files", "--modified", "--others", "--exclude-standard"],
+        capture_output=True,
+        text=True,
+        check=True
+    )
   changed_files = result.stdout.splitlines()
 
-  csv_files = [
-        sub_folder / Path(file).name
-        for file in changed_files
-        if file.endswith(".csv")
-    ]
+    # 3. Find first CSV inside storage/
+  target_file = None
+  
+  for file in changed_files:
+    full_path = Path(file)
 
-  if not csv_files:
-    print("Log: No new CSV files detected in data/ folder.")
-    return []
-
-  print(f"Log: Detected new file: {csv_files[0].name}")
-
-  with open(csv_files[0], mode="r", encoding="utf-8") as file:
-    reader = csv.DictReader(file)
-    data = list(reader)
-
-  return data  
+    if full_path.suffix == ".csv":
+      target_file = full_path
+      break
     
+  if not target_file:
+    print("No CSV file detected")
+    return []  
+  
+  
+      
+  file_path = storage / target_file.name  
+  
+  with open(file_path, "r", newline="", encoding="utf-8") as f:
+    data = []
+    reader = csv.DictReader(f)
 
+    for row in reader:
+      data.append(row)
+  
+  print(f"Loaded {len(data)} rows from {file_path.name}")    
+  
+  return data    
+
+  
 
 
 
