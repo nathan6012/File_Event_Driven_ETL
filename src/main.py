@@ -54,9 +54,10 @@ async def load_to_db_task(data1):
 
 
   
-@flow(name="File_Event_Driven_Flow",retries=3)
+@flow(name="File_Event_Driven_Flow",retries=3,log_prints=True)
 async def main_flow():
   file = fetch_csv_data()
+  print(len(file))
   
   save_raw_to_json(file)
   

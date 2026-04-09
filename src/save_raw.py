@@ -22,7 +22,7 @@ def save_raw_to_json(file):
   json_file = storage/"raw_data.json"
   
   
-  with open(json_file,"w") as f:
+  with open(json_file,"w",encoding='utf-8') as f:
     json.dump(file,f,indent=4)
     logging.info("Raw Data saved")
 
