@@ -1,7 +1,6 @@
 pandas
 pydantic
 sqlalchemy
-subprocess
 pathlib 
 pytest
 pytest-asyncio
