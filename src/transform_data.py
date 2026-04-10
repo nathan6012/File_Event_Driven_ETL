@@ -116,8 +116,16 @@ def transform_data(clean,unclean):
   
   data['Email'] = data['Email'].where(data['Email'].str.strip() != '', 'NoEmail')
   
+  
+
+
+  
   data.columns = data.columns.str.lower()
   
+  data["email"] = (
+    data["email"].str.split("@", n=1, expand=True)[0].str.replace(".", "", regex=False)
+    + "@"
+    + data["email"].str.split("@", n=1, expand=True)[1])
   
   
   final_df = data.to_dict(orient='records')
