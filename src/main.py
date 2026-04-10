@@ -60,7 +60,6 @@ async def main_flow():
   
   
   file = fetch_file_task()
-  print(len(file))
   
   
   save_raw_data_task(file)
