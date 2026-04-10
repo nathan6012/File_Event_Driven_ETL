@@ -94,6 +94,10 @@ def transform_data(clean,unclean):
   
   data= data.drop(columns=["errors","idx"])
   
+  
+  
+  
+  
   data.columns = data.columns.str.replace("data.","")
   
   
@@ -122,10 +126,10 @@ def transform_data(clean,unclean):
   
   data.columns = data.columns.str.lower()
   
-  data["email"] = (
-    data["email"].str.split("@", n=1, expand=True)[0].str.replace(".", "", regex=False)
-    + "@"
-    + data["email"].str.split("@", n=1, expand=True)[1])
+  data["email"] = data["email"].str.replace(r"\.(?=[^@]*@)", "", regex=True)
+  
+  data= data.drop(columns=["region"])
+  
   
   
   final_df = data.to_dict(orient='records')

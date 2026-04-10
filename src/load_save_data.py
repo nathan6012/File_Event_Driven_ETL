@@ -43,7 +43,6 @@ async def load_to_postgres(data):
     Column("purchase_amount", Numeric(10, 2), nullable=False),
     Column("purchase_quantity", Integer, nullable=False),
     Column("discount", Numeric(10, 2), nullable=True),
-    Column("region", String(50), nullable=False),
     Column("purchase_date", DateTime, nullable=False),)
     
   Index("id", customers.c.id)
@@ -66,9 +65,7 @@ async def load_to_postgres(data):
       "purchase_quantity": stmt.excluded.purchase_quantity,
       
       "discount": stmt.excluded.discount,
-      
-      "region": stmt.excluded.region,
-      
+  
       "purchase_date":  stmt.excluded.purchase_date })
     await conn.execute(stmt)  
   

@@ -1,0 +1,542 @@
+[
+    {
+        "Customer_Name": "John Doe",
+        "Age": "28",
+        "Email": "john.doe@example.com",
+        "Purchase_Amount": "120.5",
+        "Purchase_Quantity": "2",
+        "Discount": "10%",
+        "Region": "North",
+        "Purchase_Date": "2026-01-15"
+    },
+    {
+        "Customer_Name": "Jane Smith",
+        "Age": "34",
+        "Email": "jane.smith@example",
+        "Purchase_Amount": "150",
+        "Purchase_Quantity": "3",
+        "Discount": "5",
+        "Region": "N",
+        "Purchase_Date": "2026/01/20"
+    },
+    {
+        "Customer_Name": "Alice Johnson",
+        "Age": "twenty-five",
+        "Email": "alicej@example.com",
+        "Purchase_Amount": "200.0",
+        "Purchase_Quantity": "1",
+        "Discount": "15%",
+        "Region": "north",
+        "Purchase_Date": "15-01-2026"
+    },
+    {
+        "Customer_Name": "Bob Brown",
+        "Age": "45",
+        "Email": "bob.brown@example.com",
+        "Purchase_Amount": "100",
+        "Purchase_Quantity": "5",
+        "Discount": "5%",
+        "Region": "N",
+        "Purchase_Date": "2026-01-18"
+    },
+    {
+        "Customer_Name": "Carol White",
+        "Age": "52",
+        "Email": "carolwhite@",
+        "Purchase_Amount": "250",
+        "Purchase_Quantity": "2",
+        "Discount": "20",
+        "Region": "South",
+        "Purchase_Date": "2026-02-01"
+    },
+    {
+        "Customer_Name": "David Black",
+        "Age": "37",
+        "Email": "david.black@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "3",
+        "Discount": "10%",
+        "Region": "south",
+        "Purchase_Date": "02-02-2026"
+    },
+    {
+        "Customer_Name": "Eve Green",
+        "Age": "29",
+        "Email": "eve.green@example.com",
+        "Purchase_Amount": "180.75",
+        "Purchase_Quantity": "2",
+        "Discount": "NaN",
+        "Region": "South",
+        "Purchase_Date": "2026/02/05"
+    },
+    {
+        "Customer_Name": "Frank Lee",
+        "Age": "NaN",
+        "Email": "frank.lee@example.com",
+        "Purchase_Amount": "300",
+        "Purchase_Quantity": "1",
+        "Discount": "15%",
+        "Region": "S",
+        "Purchase_Date": "2026-02-08"
+    },
+    {
+        "Customer_Name": "Grace Kim",
+        "Age": "41",
+        "Email": "grace.kim@example.com",
+        "Purchase_Amount": "220",
+        "Purchase_Quantity": "NaN",
+        "Discount": "5%",
+        "Region": "South",
+        "Purchase_Date": "2026-02-12"
+    },
+    {
+        "Customer_Name": "Henry Young",
+        "Age": "38",
+        "Email": "",
+        "Purchase_Amount": "190",
+        "Purchase_Quantity": "4",
+        "Discount": "10%",
+        "Region": "north",
+        "Purchase_Date": "2026-02-15"
+    },
+    {
+        "Customer_Name": "Ivy Adams",
+        "Age": "27",
+        "Email": "ivy.adams@example.com",
+        "Purchase_Amount": "130",
+        "Purchase_Quantity": "2",
+        "Discount": "NaN",
+        "Region": "N",
+        "Purchase_Date": "2026-02-18"
+    },
+    {
+        "Customer_Name": "Jack White",
+        "Age": "NaN",
+        "Email": "jack.white@example",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "3",
+        "Discount": "10%",
+        "Region": "North",
+        "Purchase_Date": "2026-02-20"
+    },
+    {
+        "Customer_Name": "Karen Black",
+        "Age": "33",
+        "Email": "karen.black@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "2",
+        "Discount": "5%",
+        "Region": "south",
+        "Purchase_Date": "2026-02-22"
+    },
+    {
+        "Customer_Name": "Leo King",
+        "Age": "40",
+        "Email": "leo.king@example.com",
+        "Purchase_Amount": "210",
+        "Purchase_Quantity": "3",
+        "Discount": "20%",
+        "Region": "S",
+        "Purchase_Date": "2026/02/25"
+    },
+    {
+        "Customer_Name": "Mona Ray",
+        "Age": "31",
+        "Email": "mona.ray@example",
+        "Purchase_Amount": "150.5",
+        "Purchase_Quantity": "1",
+        "Discount": "NaN",
+        "Region": "South",
+        "Purchase_Date": "25-02-2026"
+    },
+    {
+        "Customer_Name": "Nina Scott",
+        "Age": "NaN",
+        "Email": "nina.scott@example.com",
+        "Purchase_Amount": "180",
+        "Purchase_Quantity": "2",
+        "Discount": "15%",
+        "Region": "south",
+        "Purchase_Date": "2026-02-28"
+    },
+    {
+        "Customer_Name": "Oscar Hall",
+        "Age": "36",
+        "Email": "oscar.hall@example.com",
+        "Purchase_Amount": "200",
+        "Purchase_Quantity": "3",
+        "Discount": "NaN",
+        "Region": "North",
+        "Purchase_Date": "2026-03-01"
+    },
+    {
+        "Customer_Name": "Paula Wood",
+        "Age": "29",
+        "Email": "paula.wood@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "NaN",
+        "Discount": "5%",
+        "Region": "N",
+        "Purchase_Date": "2026-03-03"
+    },
+    {
+        "Customer_Name": "Quinn Bell",
+        "Age": "44",
+        "Email": "quinn.bell@example.com",
+        "Purchase_Amount": "250.0",
+        "Purchase_Quantity": "4",
+        "Discount": "10%",
+        "Region": "north",
+        "Purchase_Date": "2026/03/05"
+    },
+    {
+        "Customer_Name": "Rick Stone",
+        "Age": "39",
+        "Email": "",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "2",
+        "Discount": "NaN",
+        "Region": "S",
+        "Purchase_Date": "2026-03-07"
+    },
+    {
+        "Customer_Name": "Sophia Lane",
+        "Age": "35",
+        "Email": "sophia.lane@example.com",
+        "Purchase_Amount": "190",
+        "Purchase_Quantity": "3",
+        "Discount": "15%",
+        "Region": "South",
+        "Purchase_Date": "2026-03-09"
+    },
+    {
+        "Customer_Name": "Tommy Fox",
+        "Age": "NaN",
+        "Email": "tommy.fox@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "1",
+        "Discount": "10%",
+        "Region": "S",
+        "Purchase_Date": "2026-03-12"
+    },
+    {
+        "Customer_Name": "Uma Knight",
+        "Age": "28",
+        "Email": "uma.knight@example.com",
+        "Purchase_Amount": "160.0",
+        "Purchase_Quantity": "2",
+        "Discount": "NaN",
+        "Region": "North",
+        "Purchase_Date": "2026-03-15"
+    },
+    {
+        "Customer_Name": "Victor Cole",
+        "Age": "32",
+        "Email": "victor.cole@example.com",
+        "Purchase_Amount": "180",
+        "Purchase_Quantity": "3",
+        "Discount": "5%",
+        "Region": "north",
+        "Purchase_Date": "15-03-2026"
+    },
+    {
+        "Customer_Name": "Wendy Hall",
+        "Age": "NaN",
+        "Email": "wendy.hall@example",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "NaN",
+        "Discount": "NaN",
+        "Region": "S",
+        "Purchase_Date": "2026-03-18"
+    },
+    {
+        "Customer_Name": "Xander Lee",
+        "Age": "41",
+        "Email": "xander.lee@example.com",
+        "Purchase_Amount": "210",
+        "Purchase_Quantity": "4",
+        "Discount": "20%",
+        "Region": "South",
+        "Purchase_Date": "2026/03/20"
+    },
+    {
+        "Customer_Name": "Yara Cruz",
+        "Age": "30",
+        "Email": "yara.cruz@example.com",
+        "Purchase_Amount": "175.5",
+        "Purchase_Quantity": "2",
+        "Discount": "10%",
+        "Region": "south",
+        "Purchase_Date": "2026-03-22"
+    },
+    {
+        "Customer_Name": "Zane Gray",
+        "Age": "38",
+        "Email": "zane.gray@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "3",
+        "Discount": "NaN",
+        "Region": "N",
+        "Purchase_Date": "2026-03-25"
+    },
+    {
+        "Customer_Name": "Aaron Moss",
+        "Age": "35",
+        "Email": "aaron.moss@example.com",
+        "Purchase_Amount": "200",
+        "Purchase_Quantity": "2",
+        "Discount": "15%",
+        "Region": "N",
+        "Purchase_Date": "2026-03-28"
+    },
+    {
+        "Customer_Name": "Beth King",
+        "Age": "NaN",
+        "Email": "beth.king@example.com",
+        "Purchase_Amount": "190",
+        "Purchase_Quantity": "NaN",
+        "Discount": "10%",
+        "Region": "north",
+        "Purchase_Date": "2026/03/30"
+    },
+    {
+        "Customer_Name": "Chris Lane",
+        "Age": "27",
+        "Email": "chris.lane@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "1",
+        "Discount": "5%",
+        "Region": "north",
+        "Purchase_Date": "2026-04-01"
+    },
+    {
+        "Customer_Name": "Diana Frost",
+        "Age": "29",
+        "Email": "diana.frost@example.com",
+        "Purchase_Amount": "180",
+        "Purchase_Quantity": "3",
+        "Discount": "NaN",
+        "Region": "S",
+        "Purchase_Date": "01-04-2026"
+    },
+    {
+        "Customer_Name": "Ethan Gray",
+        "Age": "31",
+        "Email": "ethan.gray@example.com",
+        "Purchase_Amount": "250",
+        "Purchase_Quantity": "4",
+        "Discount": "10%",
+        "Region": "South",
+        "Purchase_Date": "2026/04/03"
+    },
+    {
+        "Customer_Name": "Fiona West",
+        "Age": "33",
+        "Email": "",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "2",
+        "Discount": "NaN",
+        "Region": "N",
+        "Purchase_Date": "2026-04-05"
+    },
+    {
+        "Customer_Name": "George Hall",
+        "Age": "36",
+        "Email": "george.hall@example.com",
+        "Purchase_Amount": "200",
+        "Purchase_Quantity": "3",
+        "Discount": "15%",
+        "Region": "north",
+        "Purchase_Date": "2026-04-07"
+    },
+    {
+        "Customer_Name": "Hannah King",
+        "Age": "NaN",
+        "Email": "hannah.king@example.com",
+        "Purchase_Amount": "180",
+        "Purchase_Quantity": "2",
+        "Discount": "5%",
+        "Region": "S",
+        "Purchase_Date": "2026/04/09"
+    },
+    {
+        "Customer_Name": "Ian Cole",
+        "Age": "38",
+        "Email": "ian.cole@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "1",
+        "Discount": "NaN",
+        "Region": "South",
+        "Purchase_Date": "09-04-2026"
+    },
+    {
+        "Customer_Name": "Julia Moss",
+        "Age": "35",
+        "Email": "julia.moss@example.com",
+        "Purchase_Amount": "220",
+        "Purchase_Quantity": "3",
+        "Discount": "20%",
+        "Region": "north",
+        "Purchase_Date": "2026/04/11"
+    },
+    {
+        "Customer_Name": "Kevin Ray",
+        "Age": "40",
+        "Email": "kevin.ray@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "NaN",
+        "Discount": "NaN",
+        "Region": "N",
+        "Purchase_Date": "2026/04/13"
+    },
+    {
+        "Customer_Name": "Laura Scott",
+        "Age": "32",
+        "Email": "laura.scott@example.com",
+        "Purchase_Amount": "190",
+        "Purchase_Quantity": "2",
+        "Discount": "10%",
+        "Region": "S",
+        "Purchase_Date": "2026-04-15"
+    },
+    {
+        "Customer_Name": "Mark Lee",
+        "Age": "28",
+        "Email": "mark.lee@example.com",
+        "Purchase_Amount": "180.5",
+        "Purchase_Quantity": "1",
+        "Discount": "15%",
+        "Region": "South",
+        "Purchase_Date": "2026/04/17"
+    },
+    {
+        "Customer_Name": "Nora Adams",
+        "Age": "NaN",
+        "Email": "nora.adams@example.com",
+        "Purchase_Amount": "200",
+        "Purchase_Quantity": "3",
+        "Discount": "5%",
+        "Region": "north",
+        "Purchase_Date": "2026/04/19"
+    },
+    {
+        "Customer_Name": "Owen Black",
+        "Age": "34",
+        "Email": "owen.black@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "2",
+        "Discount": "NaN",
+        "Region": "S",
+        "Purchase_Date": "2026/04/21"
+    },
+    {
+        "Customer_Name": "Paige White",
+        "Age": "31",
+        "Email": "paige.white@example.com",
+        "Purchase_Amount": "210",
+        "Purchase_Quantity": "4",
+        "Discount": "20%",
+        "Region": "North",
+        "Purchase_Date": "21-04-2026"
+    },
+    {
+        "Customer_Name": "Quentin Gray",
+        "Age": "37",
+        "Email": "",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "2",
+        "Discount": "10%",
+        "Region": "south",
+        "Purchase_Date": "2026-04-23"
+    },
+    {
+        "Customer_Name": "Rachel Hall",
+        "Age": "29",
+        "Email": "rachel.hall@example.com",
+        "Purchase_Amount": "180",
+        "Purchase_Quantity": "3",
+        "Discount": "15%",
+        "Region": "N",
+        "Purchase_Date": "2026/04/25"
+    },
+    {
+        "Customer_Name": "Sam Knight",
+        "Age": "35",
+        "Email": "sam.knight@example.com",
+        "Purchase_Amount": "200",
+        "Purchase_Quantity": "2",
+        "Discount": "NaN",
+        "Region": "S",
+        "Purchase_Date": "2026-04-27"
+    },
+    {
+        "Customer_Name": "Tina Frost",
+        "Age": "NaN",
+        "Email": "tina.frost@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "1",
+        "Discount": "5%",
+        "Region": "South",
+        "Purchase_Date": "2026/04/29"
+    },
+    {
+        "Customer_Name": "Ulysses Lane",
+        "Age": "38",
+        "Email": "ulysses.lane@example.com",
+        "Purchase_Amount": "220",
+        "Purchase_Quantity": "3",
+        "Discount": "20%",
+        "Region": "north",
+        "Purchase_Date": "2026-04-30"
+    },
+    {
+        "Customer_Name": "Vera Adams",
+        "Age": "32",
+        "Email": "vera.adams@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "2",
+        "Discount": "NaN",
+        "Region": "S",
+        "Purchase_Date": "30-04-2026"
+    },
+    {
+        "Customer_Name": "Will Moss",
+        "Age": "40",
+        "Email": "will.moss@example.com",
+        "Purchase_Amount": "250",
+        "Purchase_Quantity": "4",
+        "Discount": "10%",
+        "Region": "South",
+        "Purchase_Date": "2026/05/02"
+    },
+    {
+        "Customer_Name": "Xenia King",
+        "Age": "NaN",
+        "Email": "xenia.king@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "3",
+        "Discount": "NaN",
+        "Region": "N",
+        "Purchase_Date": "2026/05/04"
+    },
+    {
+        "Customer_Name": "Yvonne Gray",
+        "Age": "33",
+        "Email": "yvonne.gray@example.com",
+        "Purchase_Amount": "190",
+        "Purchase_Quantity": "2",
+        "Discount": "15%",
+        "Region": "north",
+        "Purchase_Date": "2026-05-06"
+    },
+    {
+        "Customer_Name": "Zack Hall",
+        "Age": "36",
+        "Email": "zack.hall@example.com",
+        "Purchase_Amount": "NaN",
+        "Purchase_Quantity": "1",
+        "Discount": "10%",
+        "Region": "S",
+        "Purchase_Date": "06-05-2026"
+    }
+]

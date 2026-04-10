@@ -60,16 +60,47 @@ async def main_flow():
   
   
   file = fetch_file_task()
+  print("\n Extracting File Data")
+  if len(file) > 0:
+    print("\nEXTRACT:", len(file))
+    
+  print()
   
   
+  print("\n =====================")
   save_raw_data_task(file)
+  print("\n raw File saved in json format")
+  
+  print()
+  
+  print("\n=========================")
+
   
   
   clean,unclean = validate_data_task(file,UserData)
+  print(f"\nThere are the records: {len(clean)} clean records and {len(unclean)} unclean records")
+  
+  print()
+  
+  print("\n=========================")
+  
+  
   
   data1= transform_data_task(clean,unclean)
   
+  print("\n Now Processed and will be loaded to db ")
+  print()
+  
+  print("\n=========================")
+
+
+  
+  print("\n Connecting to DB")
+  
   await load_to_db_task(data1)
+  print("\n Data loaded to Db")
+  
+  print("\n=========================")
 
 if __name__=="__main__":
   asyncio.run(main_flow())
