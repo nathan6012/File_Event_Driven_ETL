@@ -25,7 +25,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: "3.11"
 
       #  Install dependencies
       - name: Install dependencies
@@ -34,16 +34,6 @@ jobs:
       # ⃣ Run ETL script
       - name: Run ETL
         run: python src/main.py
-
-      #  Commit & push generated output
-      - name: Commit and Push changes
-        run: |
-          git config --global user.name "ETL-Bot"
-          git config --global user.email "bot@github.com"
-          git add output/*
-          git commit -m "Auto-processed new CSV [skip ci]" || echo "No changes to commit"
-          git push
-
       #  Slack notification on success
       - name: Slack Notification Success
         if: success()

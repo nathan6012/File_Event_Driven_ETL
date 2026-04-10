@@ -21,40 +21,34 @@ def fetch_csv_data():
   storage = root_dir/"storage"
   #file = storage/"sample_data.csv"
 
-  result = subprocess.run(
-        ["git", "ls-files", "--modified", "--others", "--exclude-standard"],
-        capture_output=True,
-        text=True,
-        check=True,
-        cwd=root_dir  
-    )
-    
-  changed_files = result.stdout.splitlines()
-
+  
   target_file_path = None
-  for file_path_str in changed_files:
-    absolute_path = root_dir / file_path_str
     
-    if absolute_path.suffix == ".csv" and storage_dir in absolute_path.parents:
-      
-      if absolute_path.exists():
-        target_file_path = absolute_path
-        break
+    # List all files in the storage folder
+  if storage.exists():
+    for file in storage.glob("*.csv"):
+      target_file_path = file
+      break
     
   if not target_file_path:
-    print("No CSV file detected in storage")
-    return []  
+    print("No CSV file found in storage")
+    if storage.exists():
+      print("Contents of storage")
+      
+      return []  
   
-    # 2. Your original read logic restored
+    # 3. Your original read logic restored exactly
   with open(target_file_path, "r", newline="", encoding="utf-8") as f:
     data = []
     reader = csv.DictReader(f)
     for row in reader:
       data.append(row)
   
-  print(f"Loaded {len(data)} rows from {target_file_path.name}")    
-  return data
+  print(f"Loaded {len(data)} rows from {target_file_path.name}") 
   
+  
+  return data
+
 
   
 
