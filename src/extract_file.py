@@ -30,6 +30,8 @@ def load_registry(registry_path):
     return {"processed": []}
     
 
+
+
 #Helper save 
 def save_registry(registry_path, data):
   with open(registry_path, "w", encoding="utf-8") as f:
@@ -54,13 +56,13 @@ def fetch_csv_data():
 
   if not storage.exists():
     logging.info("Storage folder does not exist")
-    return []
+    return None 
 
   csv_files = list(storage.glob("*.csv"))
 
   if not csv_files:
     logging.info("No CSV file found in storage")
-    return []
+    return None 
 
     # ----------------------------
     # FIND NEW FILE
@@ -74,7 +76,7 @@ def fetch_csv_data():
 
   if not target_file_path:
     print("No NEW files to process")
-    return []
+    return None
 
     # ----------------------------
     # READ FILE
@@ -93,6 +95,8 @@ def fetch_csv_data():
     # ----------------------------
   registry["processed"].append(target_file_path.name)
   save_registry(registry_path, registry)
+  
+  
 
   return data  
 
