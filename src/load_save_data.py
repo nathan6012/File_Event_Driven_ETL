@@ -1,4 +1,6 @@
-#not set
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from sqlalchemy.ext.asyncio import create_async_engine
 import asyncio
@@ -12,9 +14,7 @@ from sqlalchemy import(Table,Column,Integer,String,MetaData,ForeignKey,Index,Num
 from sqlalchemy import DateTime
 
 from dotenv import load_dotenv
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 
 load_dotenv()
 
@@ -31,28 +31,28 @@ async def load_to_postgres(data):
   
   metadata = MetaData()
   
-  customers = Table(
-    "customers",
+  sales = Table(
+    "sales",
     metadata,
 
     Column("id", Integer, primary_key=True, autoincrement=True),
 
-    Column("customer_name", String(100), nullable=False,unique=True),
+    Column("customer_name", String(50), nullable=False,unique=True),
     Column("age", Integer, nullable=False),
-    Column("email", String(255), nullable=False),
+    Column("email", String(50), nullable=False),
     Column("purchase_amount", Numeric(10, 2), nullable=False),
     Column("purchase_quantity", Integer, nullable=False),
     Column("discount", Numeric(10, 2), nullable=True),
     Column("purchase_date", DateTime, nullable=False),)
     
-  Index("id", customers.c.id)
+  Index("id", sales.c.id)
   
   async with engine.begin() as conn:
     await conn.run_sync(metadata.create_all)
   
 
   async with engine.begin() as conn:
-    stmt = insert(customers).values(data)
+    stmt = insert(sales).values(data)
     stmt = stmt.on_conflict_do_update(
       index_elements=["customer_name"],
       
@@ -69,9 +69,15 @@ async def load_to_postgres(data):
       "purchase_date":  stmt.excluded.purchase_date })
     await conn.execute(stmt)  
   
+  await engine.dispose()
     
     
-    
+  
+async def main():
+  await load_to_postgres()
+  
+if __name__ == "__main__":
+  asyncio.run(main())
   
   
   

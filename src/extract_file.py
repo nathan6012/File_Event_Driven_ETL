@@ -1,21 +1,18 @@
-import csv
-from pathlib import Path
-
-
 import sys
 import json
 import os
 import logging 
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+import csv
+from pathlib import Path
+
+
+
 #Logging 
 logging.getLogger().setLevel(logging.INFO)
-
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-
 #Helper Load 
- 
 
 # main Extract 
 def fetch_csv_data():
@@ -45,6 +42,8 @@ def fetch_csv_data():
       data.append(row)
 
   print(f"Loaded {len(data)} rows from {target_file_path.name}")
+  
+  print(type(data))
 
 
   return data  
