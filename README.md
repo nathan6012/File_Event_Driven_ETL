@@ -33,28 +33,27 @@ This pipeline is fully **serverless-ready** and suitable for modern **data engin
 ---
 
 ## Project Structure
-
-practice_etl/etl2
-├── .env                    # Environment variables (DB credentials, paths)
-├── .github/workflows        # GitHub Actions for auto-trigger ETL
-│   └── file_etl.yml
-├── README.md
-├── requirements.txt         # Python dependencies
+README.md
+├── requirements.txt
+| -- .github/workflows/flows.yml
 ├── src
-│   ├── __init__.py
-│   ├── extract_file.py      # Extract CSV from storage
-│   ├── validate_data.py     # Pydantic validation
-│   ├── transform_data.py    # Data transformation using Pandas
-│   ├── save_raw.py          # Save raw JSON
-│   ├── load_save_data.py    # Load data to PostgreSQL
-│   ├── models.py            # SQLAlchemy models
-│   └── main.py              # Prefect flow orchestration
-├── storage                  # Folder for CSV files
-└── tests
-    ├── __init__.py
-    ├── test_extract.py
-    ├── test_load_save.py
-    └── test_save_raw.py
+│   ├── __init__.py
+│   ├── extract_file.py
+│   ├── load_save_data.py
+│   ├── main.py
+│   ├── models.py
+│   ├── save_raw.py
+│   ├── transform_data.py
+│   └── validate_data.py
+├── storage
+│   ├── sample101.csv
+│   └── sample_data.csv
+├── tests
+│   ├── __init__.py
+│   ├── test_extract.py
+│   ├── test_load_save.py
+│   └── test_save_raw.py
+
 
 ---
 
