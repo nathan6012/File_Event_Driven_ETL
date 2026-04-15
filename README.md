@@ -3,10 +3,22 @@
 [Python](https://www.python.org/) | [PostgreSQL](https://www.postgresql.org/) | [Pandas](https://pandas.pydata.org/) | [SQLAlchemy](https://www.sqlalchemy.org/) | [Pydantic](https://docs.pydantic.dev/) | [Prefect](https://www.prefect.io/) | [GitHub Actions](https://github.com/features/actions)
 
 ---
-
 ## Project Overview
 
-This project is an **event-driven ETL pipeline** for CSV files. Whenever a new CSV is committed to the `storage/` folder of the repository, the pipeline automatically:
+This project is an event-driven ETL pipeline designed to automatically process and clean incoming CSV files.
+
+Whenever a new CSV file is added to the `storage/` directory, the pipeline is triggered to:
+- Ingest the raw file
+- Validate and enforce a predefined schema
+- Clean and standardize the data (e.g., handle missing values, remove duplicates)
+- Load the processed data into a structured output (CSV, Excel, or database)
+
+## Problem It Solves
+
+In many real-world scenarios, data teams receive multiple unclean or inconsistent files (e.g., `customers.csv`, Excel sheets) from different sources. Manually cleaning and standardizing these files is time-consuming and error-prone.
+
+This pipeline automates that process by allowing users to simply drop raw files into a directory, after which the system handles validation, transformation, and storage. This ensures consistent, reliable, and analysis-ready data with minimal manual effort.
+
 
 1. **Extracts** data using Python (`Pathlib`, `subprocess`)  
 2. **Validates** data using **Pydantic** models  
@@ -64,11 +76,14 @@ practice_etl/etl2
 2. Install dependencies:
 3.Configure `.env` with your PostgreSQL credentials:
 4. Commit any CSV file to `storage/` folder:
+don't bother deleting the commited file make sure filename as a difference than the first example 
+if first committed " sales.csv " then next file mmust be at leat "sales1.csv " otherwise etl will not run 
 
 5. GitHub Actions will automatically trigger the ETL workflow:  
 Extract → Validate → Transform → Save raw JSON → Load into PostgreSQL  
 
 6. Check Prefect UI (if running locally or cloud) for flow monitoring:
+
 
 ---
 

@@ -1,7 +1,9 @@
-#not set yet
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from prefect import flow, task,get_run_logger
 import asyncio
-
 
 from extract_file import fetch_csv_data
 from save_raw import save_raw_to_json
@@ -14,9 +16,7 @@ from models import UserData
 
 
 
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 
 
 @task(retries=3,log_prints=True)

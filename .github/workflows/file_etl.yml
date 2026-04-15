@@ -15,6 +15,9 @@ jobs:
       PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/src
     #Postgress   
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      
+      PREFECT_API_KEY: ${{ secrets.PREFECT_API_KEY }}
+      PREFECT_API_URL: ${{ secrets.PREFECT_API_URL }}
 
     steps:
       # ⃣ Checkout the repository
@@ -35,18 +38,23 @@ jobs:
       - name: Run ETL
         run: python src/main.py
       #  Slack notification on success
+      
+      
+      
       - name: Slack Notification Success
         if: success()
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_MESSAGE: "File ETL workflow completed successfully!"
+          SLACK_TITLE: "ETL Success: Database Sync"
+          SLACK_COLOR: "good"
+          SLACK_MESSAGE: "The workflow finished successfully! ✅\nView Logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
-      #  Slack notification on failure
       - name: Slack Notification Failure
         if: failure()
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_MESSAGE: "File ETL pipeline Failed process"
-
+          SLACK_TITLE: "ETL Failure: Database Sync"
+          SLACK_COLOR: "danger"
+          SLACK_MESSAGE: "The workflow failed. ❌ Please check the logs to fix the error.\nView Logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
