@@ -25,7 +25,7 @@ def save_raw_to_json(file):
   storage = root_dir/"storage"
   storage.mkdir(parents=True, exist_ok=True)
   
-  ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+  ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
   
   filename = f"raw_data_{ts}.json"
     
