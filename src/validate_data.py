@@ -1,13 +1,17 @@
-from pydantic import BaseModel, ValidationError, Field, field_validator, ConfigDict
-from decimal import Decimal
-from datetime import datetime
-from typing import Optional
-import json
-
 import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+
+from pydantic import BaseModel, ValidationError, Field, field_validator, ConfigDict
+from decimal import Decimal
+from datetime import datetime
+from typing import Optional
+
+import json
+
+
 
 def validate_file_data(data,Model):
   clean = []

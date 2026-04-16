@@ -1,11 +1,16 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+
 import json
 from pathlib import Path
-
 import sys
 import os
 import logging 
+from datetime import datetime
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -18,19 +23,25 @@ def save_raw_to_json(file):
   folder_dir = Path(__file__).resolve().parent
   root_dir = folder_dir.parent
   storage = root_dir/"storage"
+  storage.mkdir(parents=True, exist_ok=True)
   
-  json_file = storage/"raw_data.json"
+  ts = datetime.now().strftime("%Y%m%d_%H%M%S")
   
+  filename = f"raw_data_{ts}.json"
+    
+  file_path = storage/filename 
   
-  with open(json_file,"w",encoding='utf-8') as f:
-    json.dump(file,f,indent=4)
-    logging.info("Raw Data saved")
-
-
+  try:
+    with open(file_path,"w",encoding='utf-8') as f:
+      json.dump(file,f,indent=4,ensure_ascii=False)
+      logging.info("Raw Data saved")
+  except Exception as e:
+    logging.info(f"Count laod json error {e}")
     
 
 def main():
-  save_raw_to_json()
+  simple_data = ("loadinf  To Save file")
+  save_raw_to_json(simple_data)
 
 if __name__=="__main__":
   main()
