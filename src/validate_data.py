@@ -37,10 +37,5 @@ def validate_file_data(data,Model):
   
   
 
-def main():
-  validate_file_data()
 
-if __name__=="__main__":
-  main()
-  
   

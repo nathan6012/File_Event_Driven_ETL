@@ -52,10 +52,3 @@ def fetch_csv_data():
   
 
 
-
-#_____________  
-def main():
-  file_data = fetch_csv_data()
-  
-if __name__=="__main__":
-  main()

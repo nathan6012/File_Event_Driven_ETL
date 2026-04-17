@@ -5,16 +5,13 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import json
 from pathlib import Path
-import sys
-import os
 import logging 
 from datetime import datetime
 
 
 
+
 logging.getLogger().setLevel(logging.INFO)
-
-
 
 
 def save_raw_to_json(file):
@@ -39,10 +36,3 @@ def save_raw_to_json(file):
     logging.info(f"Count laod json error {e}")
     
 
-def main():
-  simple_data = ("loadinf  To Save file")
-  save_raw_to_json(simple_data)
-
-if __name__=="__main__":
-  main()
-  

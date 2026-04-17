@@ -72,7 +72,7 @@ async def load_to_postgres(data):
   await engine.dispose()
     
     
-  
+ #Testing  
 async def main():
   await load_to_postgres()
   
@@ -82,46 +82,6 @@ if __name__ == "__main__":
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-async def main():
-  x = await load_to_postgres()
-
-if __name__=="__main__":
-  asyncio.run(main())
   
   
   

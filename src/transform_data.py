@@ -141,11 +141,7 @@ def transform_data(clean,unclean):
   return final_df
 
   
-def main():
-  n = transform_data()
 
-if __name__=="__main__":
-  main()
   
   
 
