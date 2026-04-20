@@ -38,7 +38,6 @@ async def load_to_postgres(data):
     Column("id", Integer, primary_key=True, autoincrement=True),
 
     Column("customer_name", String(50), nullable=False,unique=True),
-    Column("age", Integer, nullable=False),
     Column("email", String(50), nullable=False),
     Column("purchase_amount", Numeric(10, 2), nullable=False),
     Column("purchase_quantity", Integer, nullable=False),
@@ -56,10 +55,8 @@ async def load_to_postgres(data):
     stmt = stmt.on_conflict_do_update(
       index_elements=["customer_name"],
       
-      set_={"age": stmt.excluded.age,
-      
-      "email": stmt.excluded.email,
-      
+      set_={ "email": stmt.excluded.email,
+     
       "purchase_amount": stmt.excluded.purchase_amount,
       
       "purchase_quantity": stmt.excluded.purchase_quantity,
