@@ -4,32 +4,53 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 
 import json
-from pathlib import Path
-import logging 
+import pandas as pd
+import aioboto3
+from botocore.client import Config
 from datetime import datetime
+from io import BytesIO
+from dotenv import load_dotenv
 
-logging.getLogger().setLevel(logging.INFO)
+
+load_dotenv()
 
 
-def save_raw_to_json(file):
-  """Just saves our data to json for any emergency can be persisted to S3/R2"""
-  
-  folder_dir = Path(__file__).resolve().parent
-  root_dir = folder_dir.parent
-  storage = root_dir/"storage"
-  storage.mkdir(parents=True, exist_ok=True)
-  
-  ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-  
-  filename = f"raw_data_{ts}.json"
-    
-  file_path = storage/filename 
-  
-  try:
-    with open(file_path,"w",encoding='utf-8') as f:
-      json.dump(file,f,indent=4,ensure_ascii=False)
-      logging.info("Raw Data saved")
-  except Exception as e:
-    logging.info(f"Count laod json error {e}")
-    
 
+async def save_raw_to_r2(file):
+    """Convert input → DataFrame → JSON → upload to R2"""
+
+    session = aioboto3.Session()
+
+    # =========================
+    # Pandas conversion
+    # =========================
+    df = pd.DataFrame(file)
+
+    json_data = df.to_json(orient="records", force_ascii=False, indent=4)
+
+    # =========================
+    # File naming
+    # =========================
+    ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    object_key = f"raw/raw_data_{ts}.json"
+
+    # =========================
+    # Upload to R2
+    # =========================
+    async with session.client(
+        "s3",
+        endpoint_url=os.getenv("R2_ENDPOINT_URL"),
+        aws_access_key_id=os.getenv("R2_ACCESS_KEY"),
+        aws_secret_access_key=os.getenv("R2_SECRET_KEY"),
+        config=Config(signature_version="s3v4"),
+        region_name="auto"
+    ) as s3:
+
+        await s3.put_object(
+            Bucket=os.getenv("R2_BUCKET_NAME"),
+            Key=object_key,
+            Body=json_data.encode("utf-8"),
+            ContentType="application/json"
+        )
+
+    return object_key

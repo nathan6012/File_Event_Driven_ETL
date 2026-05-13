@@ -1,120 +1,331 @@
 
 # 📊 Event-Driven CSV File ETL
-[Python](https://www.python.org/) | [PostgreSQL](https://www.postgresql.org/) | [Pandas](https://pandas.pydata.org/) | [SQLAlchemy](https://www.sqlalchemy.org/) | [Pydantic](https://docs.pydantic.dev/) | [Prefect](https://www.prefect.io/) | [GitHub Actions](https://github.com/features/actions)
 
----
-## Project Overview
+![Python](https://img.shields.io/badge/Language-Python-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)
+![Redis](https://img.shields.io/badge/Cache-Redis-DC382D?logo=redis&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Dashboard-Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+![Prefect](https://img.shields.io/badge/Orchestration-Prefect-06b6d4)
+![Pandas](https://img.shields.io/badge/Data-Pandas-black)
+![SQLAlchemy](https://img.shields.io/badge/Database-SQLAlchemy-red)
+![Cloudflare R2](https://img.shields.io/badge/Storage-Cloudflare%20R2-F38020?logo=cloudflare&logoColor=white)
+![Neon PostgreSQL](https://img.shields.io/badge/Storage-Neon%20PostgreSQL-00E599?logo=postgresql&logoColor=white)
 
-This project is an event-driven ETL pipeline designed to automatically process and clean incoming CSV files.
-
-Whenever a new CSV file is added to the `storage/` directory, the pipeline is triggered to:
-- Ingest the raw file
-- Validate and enforce a predefined schema
-- Clean and standardize the data (e.g., handle missing values, remove duplicates)
-- Load the processed data into a structured output (CSV, Excel, or database)
-
-## Problem It Solves
-
-In many real-world scenarios, data teams receive multiple unclean or inconsistent files (e.g., `customers.csv`, Excel sheets) from different sources. Manually cleaning and standardizing these files is time-consuming and error-prone.
-
-This pipeline automates that process by allowing users to simply drop raw files into a directory, after which the system handles validation, transformation, and storage. This ensures consistent, reliable, and analysis-ready data with minimal manual effort.
-
-
-1. **Extracts** data using Python (`Pathlib`, `subprocess`)  
-2. **Validates** data using **Pydantic** models  
-3. **Transforms** data using **Pandas**  
-4. **Saves raw JSON** files for auditing  
-5. **Loads** transformed data into **Neon PostgreSQL** using **SQLAlchemy**  
-6. Orchestrates the workflow automatically using **Prefect** and **GitHub Actions**  
-7. sends slack notifications after failure or success
-
-This pipeline is fully **serverless-ready** and suitable for modern **data engineering automation**.
 
 ---
 
-## Project Structure
-README.md
+#🚀 Event-Driven ETL Platform (FastAPI + Redis + Streamlit)
+
+#📌 Project Overview
+
+This project is a real-time, event-driven ETL system that allows end users to simply drop or upload CSV files, which are then automatically processed through a full data pipeline.
+
+The system combines:
+
+FastAPI → file ingestion API layer
+
+Redis → event queue / job triggering system
+
+ETL Pipeline (Python) → extract, validate, transform, load
+
+Streamlit Dashboard → Enduser data upload 
+
+Slack Notifications → real-time pipeline status alerts
+
+
+Once a file is received, the system automatically triggers an ETL workflow that processes the data and makes it available for analytics.
+
+
+---
+
+##🎯 Problem It Solves
+
+In many real-world scenarios:
+
+Users upload inconsistent CSV files
+Data arrives from multiple sources
+Manual cleaning is slow and error-prone
+Teams lack real-time visibility into processing status
+
+This system solves that by:
+
+> Turning file uploads into an automated, event-driven data pipeline with real-time processing, validation, and monitoring from file to Database and Cloud  and analytics Ready Data 
+
+
+
+
+---
+
+⚙️ System Architecture
+
+🧩 Core Flow
+
+User Uploads File (FastAPI)
+        ↓
+Redis Queue (Event Trigger)
+        ↓
+ETL Worker (Redis Worker)
+        ↓
+Extract → Validate → Transform
+        ↓
+Save Raw JSON (Audit Layer)
+        ↓
+Load Processed Data (Storage / DB)
+        ↓
+Slack Notification (Success / Failure)
+        ↓
+Streamlit Dashboard (Visualization)
+
+
+---
+
+🏗️ Project Structure
+
+.
+├── app/
+│   ├── api.py              # FastAPI entry points
+│   ├── routers.py          # Upload & endpoints
+│
+├── connectors/
+│   ├── redis_client.py     # Redis connection + queue handling
+│
+├── dashboard/
+│   ├── dashboard.py        # Streamlit UI for analytics
+│
+├── src/
+│   ├── extract_file.py     # File ingestion logic
+│   ├── validate_data.py    # Schema validation (Pydantic)
+│   ├── transform_data.py   # Data cleaning (Pandas)
+│   ├── load_save_data.py   # Load processed data
+│   ├── save_raw.py         # Raw JSON archival layer
+│   ├── redis_worker.py    # ETL worker consuming Redis jobs
+│   ├── models.py           # Data schemas
+│   ├── main.py             # Pipeline entry orchestration
+│
+├── utils/
+│   ├── notifier.py         # Slack notifications
+│   ├── cleanup.py          # Storage cleanup job
+│
+├── storage/                # Raw + processed file storage layer
+│
+├── sql/
+│   ├── models.sql          # Database schema
+│
+├── tests/
+│   ├── test_extract.py
+│   ├── test_load_save.py
+│   ├── test_save_raw.py
+│
 ├── requirements.txt
-| -- .github/workflows/flows.yml
-├── src
-│   ├── __init__.py
-│   ├── extract_file.py
-│   ├── load_save_data.py
-│   ├── main.py
-│   ├── models.py
-│   ├── save_raw.py
-│   ├── transform_data.py
-│   └── validate_data.py
-├── storage
-│   ├── sample101.csv
-│   └── sample_data.csv
-├── tests
-│   ├── __init__.py
-│   ├── test_extract.py
-│   ├── test_load_save.py
-│   └── test_save_raw.py
+└── README.md
 
 
 ---
 
-## Features
+✨ Key Features
 
-- **Event-Driven**: Starts ETL automatically when CSV is committed  
-- **Validation**: Pydantic models ensure schema consistency  
-- **Transformation**: Pandas handles cleaning, type conversion, and calculations  
-- **Raw Data Archiving**: Saves raw JSON for traceability  
-- **Database Integration**: Uses SQLAlchemy to load data into PostgreSQL  
-- **Orchestration**: Prefect flows handle ETL scheduling and retries  
-- **CI/CD Ready**: GitHub Actions triggers ETL without manual intervention  
+⚡ Event-Driven Architecture
+
+File upload triggers Redis event
+
+Worker processes ETL automatically
+
+
+🧼 Data Processing Pipeline
+
+Extract raw CSV files
+
+Validate using Pydantic schemas
+
+Transform using Pandas
+
+Load into structured storage/database
+
+
+💾 Raw Data Archiving
+
+Every input file is saved as JSON
+
+Ensures traceability and audit logs
+
+
+📊 Dashboard (Streamlit)
+
+View processed datasets
+
+Monitor pipeline status
+
+
+🔔 Real-Time Notifications
+
+Slack alerts for:
+
+ETL success
+
+ETL failure
+
+system errors
+
+
+
+⚙️ Background Processing
+
+Redis worker handles async ETL execution
+
+Prevents blocking API requests
+
+
 
 ---
 
-## Usage
+🚀 Business Value (Why this matters)
 
-1. Clone the repository:
-2. Install dependencies:
-3.Configure `.env` with your PostgreSQL credentials:
-4. Commit any CSV file to `storage/` folder:
-don't bother deleting the commited file make sure filename as a difference than the first example 
-if first committed " sales.csv " then next file mmust be at leat "sales1.csv " otherwise etl will not run 
+This system simulates real-world data engineering problems:
 
-5. GitHub Actions will automatically trigger the ETL workflow:  
-Extract → Validate → Transform → Save raw JSON → Load into PostgreSQL  
+✔ Solves:
 
-6. Check Prefect UI (if running locally or cloud) for flow monitoring:
+Manual data cleaning workflows
+
+Delayed batch processing systems
+
+Lack of pipeline visibility
+
+Poor data quality control
+
+No real-time feedback on ingestion
+
+
+
+---
+
+🧠 What Makes This Project Strong
+
+This is not just ETL — it is a:
+
+> 🟢 Mini Data Platform with Event-Driven Architecture
+
+
+
+##It demonstrates:
+
+Backend engineering (FastAPI)
+
+Distributed systems thinking (Redis queues)
+
+Data engineering (ETL pipelines)
+
+Data validation (Pydantic)
+
+Observability (Slack alerts)
+
+Analytics layer (Streamlit dashboard)
+
 
 
 ---
 
-## Workflow Diagram
+##🔁 ETL Pipeline Stages
 
-Commit CSV to storage → Extract CSV → Validate with Pydantic → Transform with Pandas → Save raw JSON → Load to PostgreSQL → Orchestrate & Monitor with Prefect
+1. Extract
+
+CSV file ingestion
+
+2. Validate
+
+Schema enforcement (Pydantic)
+
+3. Transform
+
+Cleaning, deduplication, formatting
+
+4. Load
+Store processed data/ Posgtresql
+
+5. Audit
+
+Save raw JSON snapshot to R2
 
 ---
 
-## Tools & Libraries
+##🔔 Notification System
 
-| Tool        | Purpose                                   | Link |
-|------------|-------------------------------------------|------|
-| Python     | Core programming                           | https://www.python.org/ |
-| Pandas     | Data transformation                        | https://pandas.pydata.org/ |
-| Pydantic   | Data validation                            | https://docs.pydantic.dev/ |
-| SQLAlchemy | Database ORM                               | https://www.sqlalchemy.org/ |
-| Prefect    | Workflow orchestration                     | https://www.prefect.io/ |
-| PostgreSQL | Data storage                               | https://www.postgresql.org/ |
-| GitHub Actions | CI/CD & event-driven triggers          | https://github.com/features/actions |
-| Pathlib    | File system path management                | https://docs.python.org/3/library/pathlib.html |
-| Subprocess | Run external commands (optional)           | https://docs.python.org/3/library/subprocess.html |
+The system sends Slack alerts for:
+
+✅ ETL Success
+
+❌ ETL Failure
+
+⚠️ Processing Errors
+---
+
+📊 Dashboard
+
+Streamlit dashboard provides:
+UI for User to uplaod Data 
 
 ---
 
-## Testing
+##🧰 Tech Stack
 
-Run the tests using **pytest**:
+Tool	Purpose
+
+FastAPI	API ingestion layer
+Redis	Event queue system
+Python	Core ETL logic
+Pandas	Data transformation
+Pydantic	Schema validation
+Streamlit	Dashboard UI
+Slack API	Notifications
+SQL	Data storage layer
+
+
+
 ---
 
-## Notes
+🧪 Testing
 
-- Ensure `.env` is **never committed** to GitHub (add to `.gitignore`)  
-- Raw JSON files are stored in `/storage/raw/`  
-- The ETL pipeline is modular—easy to extend with new CSV sources or transformations
+pytest
+
+
+---
+
+📌 Future Improvements
+
+Add data versioning system
+
+Add role-based dashboard access
+
+Add observability (logs + metrics + tracing)
+
+
+
+---
+
+🏁 Summary
+
+This project is a:
+
+> Real-time event-driven ETL system combining FastAPI, Redis, Streamlit, and automated data validation pipelines.
+
+Usage 
+create Venv add R2 Credentials and Database in .env 
+
+git clone https://github.com/nathan6012/File_Event_Driven_ETL.git
+
+cd to :/ root folder 
+  run in terminal (root)
+  uvicorn app.api:app --host 0.0.0.0 --port 8000
+  redis-server 
+  streamlit run dashboard/dashboard.py
+  then Open Chrome/ and upload file 
+  
+  note: all services / servers must be running 
+  api,streamlit,redis server and  redis_worker 
+  # run workflow / see workflow  
+  python src/redis_worker.py
+  
+  note : the worker wi remain listing for any Activities from the api 
+  
+
+
+

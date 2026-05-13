@@ -46,6 +46,10 @@ async def load_to_postgres(data):
     
   Index("id", sales.c.id)
   
+  
+  
+  
+  
   async with engine.begin() as conn:
     await conn.run_sync(metadata.create_all)
   
