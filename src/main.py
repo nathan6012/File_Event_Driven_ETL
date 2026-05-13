@@ -62,48 +62,64 @@ async def main_flow(job: dict):
     file_path = job["file_path"]
 
     try:
-        # 1. Extract
+        # 1. EXTRACT (fail fast ok)
         file = fetch_file_task()
         print(f"Extracted: {len(file)} records")
 
-        # 2. Save raw
-        await save_raw_data_task(file)
+        # 2. SAVE RAW (non-critical → safe)
+        try:
+            await save_raw_data_task(file)
+        except Exception as e:
+            print(f"⚠ Raw save failed (ignored): {e}")
 
-        # 3. Validate
+        # 3. VALIDATE (critical but safe output expected)
         clean, unclean = validate_data_task(file, UserData)
         print(f"Clean: {len(clean)} | Unclean: {len(unclean)}")
 
-        # 4. Transform
+        # 4. TRANSFORM (critical)
         data1 = transform_data_task(clean, unclean)
-        
-        send_etl_success(
+
+        # 5. LOAD (MOST IMPORTANT FIX HERE)
+        try:
+          
+            await load_to_db_task(data1)
+            
+            send_etl_success(
             job_id=job["job_id"],
             file_path=file_path,
-            data = len(data1))
+            data=len(data1)
+        )
 
+            print("LOAD SUCCESS")
+            print("ETL COMPLETE")
 
-        # 5. Load
-        await load_to_db_task(data1)
+        except Exception as load_error:
 
-        print("ETL COMPLETE")
+            # ❗ DO NOT FAIL ENTIRE FLOW
+            print(f"❌ Load failed but ETL continues: {load_error}")
 
-        # =========================
-        # SUCCESS NOTIFICATION
-        # =========================
+            send_etl_failure(
+                job_id=job["job_id"],
+                error=f"LOAD_ERROR: {str(load_error)}"
+            )
 
-        # cleanup after success
-        delete_old_files_task()
+        # 6. CLEANUP (always run)
+        try:
+            delete_old_files_task()
+            print("Files Checked")
+        except Exception as e:
+            print("⚠ Cleanup failed:")
+
+        
 
     except Exception as e:
 
-        # =========================
-        # FAILURE NOTIFICATION
-        # =========================
+        # only true system-level failure ends here
         send_etl_failure(
             job_id=job["job_id"],
-            error=str(e)
-        )
+            error=f"PIPELINE_CRASH:{len(e)}")
 
         print(f"ETL FAILED: {e}")
 
+        # still raise for Prefect visibility
         raise

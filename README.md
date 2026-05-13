@@ -51,9 +51,6 @@ This system solves that by:
 
 > Turning file uploads into an automated, event-driven data pipeline with real-time processing, validation, and monitoring from file to Database and Cloud  and analytics Ready Data 
 
-
-
-
 ---
 
 ⚙️ System Architecture
@@ -219,9 +216,6 @@ Data validation (Pydantic)
 Observability (Slack alerts)
 
 Analytics layer (Streamlit dashboard)
-
-
-
 ---
 
 ##🔁 ETL Pipeline Stages
@@ -263,24 +257,7 @@ The system sends Slack alerts for:
 Streamlit dashboard provides:
 UI for User to uplaod Data 
 
----
-
-##🧰 Tech Stack
-
-Tool	Purpose
-
-FastAPI	API ingestion layer
-Redis	Event queue system
-Python	Core ETL logic
-Pandas	Data transformation
-Pydantic	Schema validation
-Streamlit	Dashboard UI
-Slack API	Notifications
-SQL	Data storage layer
-
-
-
----
+--
 
 🧪 Testing
 
@@ -292,12 +269,8 @@ pytest
 📌 Future Improvements
 
 Add data versioning system
-
 Add role-based dashboard access
-
 Add observability (logs + metrics + tracing)
-
-
 
 ---
 
@@ -307,20 +280,28 @@ This project is a:
 
 > Real-time event-driven ETL system combining FastAPI, Redis, Streamlit, and automated data validation pipelines.
 
-Usage 
-create Venv add R2 Credentials and Database in .env 
+## Usage 
+*create new folder
+*git clone https://github.com/nathan6012/File_Event_Driven_ETL.git
+*create venv add R2 Credentials and Database in .env 
+*install requirments.txt 
 
-git clone https://github.com/nathan6012/File_Event_Driven_ETL.git
 
-cd to :/ root folder 
-  run in terminal (root)
-  uvicorn app.api:app --host 0.0.0.0 --port 8000
-  redis-server 
-  streamlit run dashboard/dashboard.py
-  then Open Chrome/ and upload file 
+in root folder:
+  run commands in  terminal
+👇
+  
+  *uvicorn app.api:app --host 0.0.0.0 --port 8000
+  *redis-server 
+  *streamlit run dashboard/dashboard.py
+  *python src/redis_worker.py
+  then Open Chrome/ and upload file csv
+  
+  disclaimer: Runs on specific schemas,does not support all schemas,
+  cSV sample File in Root/ sales_data1.csv 
   
   note: all services / servers must be running 
-  api,streamlit,redis server and  redis_worker 
+  fastapi,streamlit,redis server and  redis_worker in terminal 
   # run workflow / see workflow  
   python src/redis_worker.py
   
