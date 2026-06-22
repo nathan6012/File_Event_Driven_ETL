@@ -2,7 +2,7 @@ import pytest
 from pathlib import Path
 from unittest.mock import patch, mock_open,MagicMock
 
-from src.extract_file import fetch_csv_data
+from worker.extract_file import fetch_csv_data
 
 
 @patch("pathlib.Path.exists", return_value=False)

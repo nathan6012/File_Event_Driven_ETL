@@ -303,7 +303,7 @@ in root folder:
   note: all services / servers must be running 
   fastapi,streamlit,redis server and  redis_worker in terminal 
   # run workflow / see workflow  
-  python src/redis_worker.py
+  python worker/redis_worker.py
   
   note : the worker wi remain listing for any Activities from the api 
   

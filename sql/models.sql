@@ -19,5 +19,7 @@ dem_sales_customers(customer_id),
 date_id INT NOT NULL,
 purchase_amount NUMERIC NOT NULL,
 purchase_quantity NUMERIC NOT NULL,
-discount NUMERIC NOT NULL )
+discount NUMERIC NOT NULL );
 
+
+CREATE INDEX sales_idx ON facts_sales(sales_id);
