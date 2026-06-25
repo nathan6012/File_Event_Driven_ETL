@@ -54,6 +54,8 @@ def delete_old_files_task():
 # FLOW
 # =========================
 
+
+
 @flow(name="File_Event_Driven_Flow", retries=3, log_prints=True)
 async def main_flow(job: dict):
 
@@ -62,64 +64,59 @@ async def main_flow(job: dict):
     file_path = job["file_path"]
 
     try:
-        # 1. EXTRACT (fail fast ok)
-        file = fetch_file_task()
+        # 1. EXTRACT
+        file = fetch_file_task(file_path)
         print(f"Extracted: {len(file)} records")
 
-        # 2. SAVE RAW (non-critical → safe)
+        # 2. SAVE RAW (non-critical)
         try:
             await save_raw_data_task(file)
         except Exception as e:
             print(f"⚠ Raw save failed (ignored): {e}")
 
-        # 3. VALIDATE (critical but safe output expected)
+        # 3. VALIDATE
         clean, unclean = validate_data_task(file, UserData)
         print(f"Clean: {len(clean)} | Unclean: {len(unclean)}")
 
-        # 4. TRANSFORM (critical)
-        data1 = transform_data_task(clean, unclean)
+        # 4. TRANSFORM
+        data = transform_data_task(clean, unclean)
+        print(len(data))
 
-        # 5. LOAD (MOST IMPORTANT FIX HERE)
+        # 5. LOAD
         try:
-          
-            await load_to_db_task(data1)
-            
+            await load_to_db_task(data)
+
             send_etl_success(
-            job_id=job["job_id"],
-            file_path=file_path,
-            data=len(data1)
-        )
+                job_id=job["job_id"],
+                file_path=file_path,
+                data=len(data)
+            )
 
             print("LOAD SUCCESS")
             print("ETL COMPLETE")
 
         except Exception as load_error:
 
-            # ❗ DO NOT FAIL ENTIRE FLOW
             print(f"❌ Load failed but ETL continues: {load_error}")
 
             send_etl_failure(
                 job_id=job["job_id"],
-                error=f"LOAD_ERROR: {str(load_error)}"
+                error=str(load_error)
             )
 
-        # 6. CLEANUP (always run)
+        # 6. CLEANUP
         try:
             delete_old_files_task()
-            print("Files Checked")
+            print("Cleanup completed")
         except Exception as e:
-            print("⚠ Cleanup failed:")
-
-        
+            print(f"⚠ Cleanup failed: {e}")
 
     except Exception as e:
 
-        # only true system-level failure ends here
         send_etl_failure(
             job_id=job["job_id"],
-            error=f"PIPELINE_CRASH:{len(e)}")
+            error=f"PIPELINE_CRASH: {str(e)}"
+        )
 
         print(f"ETL FAILED: {e}")
-
-        # still raise for Prefect visibility
         raise

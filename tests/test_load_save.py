@@ -12,8 +12,8 @@ from worker.load_save_data import load_to_postgres
 # Test: load_to_postgres
 # =========================
 @pytest.mark.asyncio
-@patch("src.load_save_data.create_async_engine")
-@patch("src.load_save_data.os.getenv", return_value="postgresql+asyncpg://user:pass@localhost/db")
+@patch("worker.load_save_data.create_async_engine")
+@patch("worker.load_save_data.os.getenv", return_value="postgresql+asyncpg://user:pass@localhost/db")
 async def test_load_to_postgres(mock_env, mock_engine):
     
     # -------------------------
