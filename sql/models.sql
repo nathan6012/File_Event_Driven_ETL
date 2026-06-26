@@ -7,7 +7,7 @@ created_at TIMESTAMP DEFAULT NOW()
 
 
 CREATE TABLE dem_dates_sales(
-date_id DATE PRIMARY KEY,
+date_id INT PRIMARY KEY,
 purchase_date DATE 
 );
 
