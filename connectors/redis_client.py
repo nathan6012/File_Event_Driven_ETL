@@ -7,7 +7,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 import json
 import os
 from dotenv import load_dotenv
-from redis import Redis   # 🔥 SWITCHED TO ASYNC
+from redis import Redis   # 🔥 SWITCHED TO SYNC
 
 # =========================
 # LOAD ENV

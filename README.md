@@ -294,7 +294,7 @@ in root folder:
   *uvicorn app.api:app --host 0.0.0.0 --port 8000
   *redis-server 
   *streamlit run dashboard/dashboard.py
-  *python worker/redis_worker.py
+  *python connectors/redis_worker.py
   then Open Chrome/ and upload file csv
   
   disclaimer: Runs on specific schemas,does not support all schemas,

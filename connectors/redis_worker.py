@@ -6,18 +6,18 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 import time
 import asyncio
 #from connectors.redis_client import dequeue_job, set_job_status
-from main import main_flow
+from worker.main import main_flow
 
 
 # 1. Import enqueue_job instead of the non-existent requeue_job
-from connectors.redis_client import dequeue_job, set_job_status, enqueue_job
+from redis_client import dequeue_job, set_job_status, enqueue_job
 
 MAX_RETRIES = 2
 
 
 
 import asyncio
-from connectors.redis_client import dequeue_job, set_job_status, enqueue_job
+from redis_client import dequeue_job, set_job_status, enqueue_job
 
 MAX_RETRIES = 3
 
